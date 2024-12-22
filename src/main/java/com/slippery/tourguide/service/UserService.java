@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public interface UserService {
     UserDto createNewUser(User user, MultipartFile profileImage) throws IOException;
-    UserDto updateUser(User user);
+    UserDto updateUser(User user,Long userId);
     UserDto deleteUser(Long userId);
     UserDto findUserById(Long userId);
     UserDto findAllUsers();

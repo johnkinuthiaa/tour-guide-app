@@ -29,7 +29,7 @@ public class User {
     private String role;
     private String phoneNumber;
     private LocalDateTime createdOn;
-    private boolean isActive;
+    private Boolean isActive;
     private byte[] profilePhoto;
     
 
