@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createNewUser(User user, MultipartFile profileImage) throws IOException {
+    public UserDto createNewUser(User user)  {
         UserDto response =new UserDto();
         User existingUser =repository.findUserByUsername(user.getUsername());
         if(existingUser ==null){
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
             newUser.setPhoneNumber(user.getPhoneNumber());
             newUser.setRole(user.getRole());
             newUser.setUsername(user.getUsername());
-            newUser.setProfilePhoto(profileImage.getBytes());
+            newUser.setProfilePhoto(null);
             repository.save(newUser);
             response.setMessage("user "+user.getUsername()+" created successfully");
             response.setUser(newUser);
@@ -45,6 +45,25 @@ public class UserServiceImpl implements UserService {
         }else {
             response.setErrorMessage("user already has an account");
             response.setStatusCode(500);
+        }
+        return response;
+    }
+
+    @Override
+    public UserDto updateUserProfileImage(Long userId, MultipartFile image) throws IOException {
+        UserDto response =new UserDto();
+        Optional<User> existingUser =repository.findById(userId);
+        if(existingUser.isEmpty()) {
+            response.setErrorMessage("user does not exist");
+            response.setStatusCode(200);
+            return response;
+        }else{
+            existingUser.get()
+                    .setProfilePhoto(
+                            image.getBytes());
+            repository.save(existingUser.get());
+            response.setErrorMessage("profile image updated");
+            response.setStatusCode(200);
         }
         return response;
     }
