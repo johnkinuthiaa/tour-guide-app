@@ -36,7 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/adminuser/**").hasAnyAuthority("ADMIN","USER")
                         .requestMatchers("/user/**").hasAnyAuthority("USER")
-                        .anyRequest().permitAll())
+                        .anyRequest().authenticated())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
