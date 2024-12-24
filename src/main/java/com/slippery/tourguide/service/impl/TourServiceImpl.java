@@ -29,8 +29,29 @@ public class TourServiceImpl implements TourService {
     public TourDto updateTour(Tour tourDetails,Long tourId) {
         TourDto response =new TourDto();
         Optional<Tour> existingTour =repository.findById(tourId);
-        y
-        return null;
+        if(existingTour.isEmpty()){
+            response.setMessage("tour does not exist!");
+            response.setStatusCode(204);
+            return response;
+        }else{
+            Tour toUpdate =existingTour.get();
+            toUpdate.setDuration(tourDetails.getDuration());
+            toUpdate.setEndDate(tourDetails.getEndDate());
+            toUpdate.setImages(tourDetails.getImages());
+            toUpdate.setLocation(tourDetails.getLocation());
+            toUpdate.setMaxParticipants(tourDetails.getMaxParticipants());
+            toUpdate.setPrice(tourDetails.getPrice());
+            toUpdate.setRatings(tourDetails.getRatings());
+            toUpdate.setReviews(tourDetails.getReviews());
+            toUpdate.setTitle(tourDetails.getTitle());
+            toUpdate.setStartDate(tourDetails.getStartDate());
+            tourDetails.setTourGuide(tourDetails.getTourGuide());
+
+            repository.save(toUpdate);
+            response.setMessage("tour updated!");
+            response.setStatusCode(200);
+        }
+        return response;
     }
 
     @Override
