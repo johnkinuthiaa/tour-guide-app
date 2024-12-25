@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 public class TourController {
     /*
     TourDto createNewTour(Tour tourDetails);
-    TourDto updateTour(Tour tourDetails,Long tourId);
-    TourDto findTourById(Long tourId);
+
+    ;
     TourDto deleteTourById(Long tourId);
      */
     private final TourService service;
@@ -25,5 +25,12 @@ public class TourController {
     public ResponseEntity<TourDto> createNewTour(@RequestBody Tour tourDetails){
         return ResponseEntity.ok(service.createNewTour(tourDetails));
     }
-//    @PutMapping("/")
+    @PutMapping("/update/tour")
+    public ResponseEntity<TourDto> updateTour(@RequestBody Tour tourDetails,@RequestParam Long tourId){
+        return ResponseEntity.ok(service.updateTour(tourDetails,tourId));
+    }
+    @GetMapping("/get/id")
+    public ResponseEntity<TourDto> findTourById(@RequestParam Long tourId){
+        return ResponseEntity.ok(service.findTourById(tourId));
+    }
 }
