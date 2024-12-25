@@ -56,7 +56,17 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public TourDto findTourById(Long tourId) {
-        return null;
+        TourDto response =new TourDto();
+        Optional<Tour> existingTour =repository.findById(tourId);
+        if(existingTour.isEmpty()){
+            response.setMessage("tour does not exist!");
+            response.setStatusCode(204);
+            return response;
+        }
+        response.setTour(existingTour.get());
+        response.setMessage("tour width id "+tourId);
+        response.setStatusCode(200);
+        return response;
     }
 
     @Override
