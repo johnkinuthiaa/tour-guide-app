@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class TourController {
     /*
-    TourDto createNewTour(Tour tourDetails);
 
     ;
     TourDto deleteTourById(Long tourId);
