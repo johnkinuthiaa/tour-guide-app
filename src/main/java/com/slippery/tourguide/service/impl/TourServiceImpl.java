@@ -37,7 +37,7 @@ public class TourServiceImpl implements TourService {
             Tour toUpdate =existingTour.get();
             toUpdate.setDuration(tourDetails.getDuration());
             toUpdate.setEndDate(tourDetails.getEndDate());
-            toUpdate.setImages(tourDetails.getImages());
+//            toUpdate.setImages(tourDetails.getImages());
             toUpdate.setLocation(tourDetails.getLocation());
             toUpdate.setMaxParticipants(tourDetails.getMaxParticipants());
             toUpdate.setPrice(tourDetails.getPrice());

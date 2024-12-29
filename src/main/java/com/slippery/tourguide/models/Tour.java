@@ -27,8 +27,8 @@ public class Tour {
     private Long price;
     private Integer duration;
     private Integer maxParticipants;
-    @Lob
-    private List<Byte[]> images =new ArrayList<>();
+//    @Lob
+//    private List<Byte[]> images;
     private int ratings;
     @ElementCollection
     private List<String> reviews;
