@@ -1,5 +1,6 @@
 package com.slippery.tourguide.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,9 @@ public class RatingsAndReviews {
     private String reviewText;
     private LocalDateTime time;
     @ManyToOne
+    @JsonBackReference
     private User user;
     @ManyToOne
+    @JsonBackReference
     private Tour tour;
 }

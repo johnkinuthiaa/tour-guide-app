@@ -36,4 +36,13 @@ public class ReviewController {
     ){
         return ResponseEntity.ok(service.deleteReview(reviewId, userId, tourId));
     }
+    @GetMapping("/get/review-id")
+    public ResponseEntity<ReviewDto> getReviewById(
+            @RequestParam Long reviewId,
+            @RequestParam Long userId,
+            @RequestParam Long tourId
+
+    ){
+        return ResponseEntity.ok(service.getReviewById(reviewId,userId, tourId));
+    }
 }

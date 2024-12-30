@@ -11,7 +11,6 @@ import com.slippery.tourguide.service.ReviewService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -109,7 +108,7 @@ public class ReviewServiceImpl implements ReviewService {
             response.setStatusCode(404);
             return response;
         }
-        if(Objects.equals(reviews1.get().getTour().getId(), tourId) && Objects.equals(reviews1.get().getUser().getId(), userId)){
+        if(!reviews1.get().getTour().getId().equals(tourId) &&!reviews1.get().getUser().getId().equals(userId)){
             response.setErrorMessage("Review does not belong to the user ot tour");
             response.setStatusCode(500);
             return response;
@@ -122,6 +121,32 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public ReviewDto getReviewById(Long reviewId, Long userId,Long tourId) {
-        return null;
+        Optional<RatingsAndReviews> reviews1 =repository.findById(reviewId);
+        Optional<Tour> tour =tourRepository.findById(tourId);
+        Optional<User> user =userRepository.findById(userId);
+        ReviewDto response =new ReviewDto();
+        if(reviews1.isEmpty()){
+            response.setErrorMessage("Review not found");
+            response.setStatusCode(404);
+            return response;
+        }
+        if(user.isEmpty()){
+            response.setErrorMessage("User not found");
+            response.setStatusCode(404);
+            return response;
+        }
+        if(tour.isEmpty()){
+            response.setErrorMessage("Tour not found");
+            response.setStatusCode(404);
+            return response;
+        }
+        if(!reviews1.get().getTour().getId().equals(tourId) &&!reviews1.get().getUser().getId().equals(userId)){
+            response.setErrorMessage("Review does not belong to the user ot tour");
+            response.setStatusCode(500);
+            return response;
+        }
+        response.setRatings(reviews1.get());
+        response.setStatusCode(200);
+        return response;
     }
 }
