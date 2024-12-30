@@ -22,4 +22,18 @@ public class ReviewController {
         return ResponseEntity.ok(service.createNewReview(reviews, userId, tourId));
 
     }
+    @PutMapping("/update/review")
+    public ResponseEntity<ReviewDto> updateReview(@RequestBody RatingsAndReviews reviews,
+                                  @RequestParam Long userId,
+                                  @RequestParam Long tourId,
+                                  @RequestParam Long reviewId){
+        return ResponseEntity.ok(service.updateReview(reviews, userId, tourId, reviewId));
+    }
+    @DeleteMapping("/delete/review")
+    public ResponseEntity<ReviewDto> deleteReview(@RequestParam Long reviewId,
+                                  @RequestParam Long userId,
+                                  @RequestParam Long tourId
+    ){
+        return ResponseEntity.ok(service.deleteReview(reviewId, userId, tourId));
+    }
 }

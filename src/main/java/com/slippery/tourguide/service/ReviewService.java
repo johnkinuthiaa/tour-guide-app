@@ -5,8 +5,8 @@ import com.slippery.tourguide.models.RatingsAndReviews;
 
 public interface ReviewService {
     ReviewDto createNewReview(RatingsAndReviews reviews,Long userId,Long tourId);
-    ReviewDto updateReview(RatingsAndReviews reviews,Long reviewId,Long userId);
-    ReviewDto deleteReview(Long reviewId,Long userId);
-    ReviewDto getReviewById(Long reviewId,Long userId);
+    ReviewDto updateReview(RatingsAndReviews reviews,Long userId,Long tourId,Long reviewId);
+    ReviewDto deleteReview(Long reviewId,Long userId,Long tourId);
+    ReviewDto getReviewById(Long reviewId,Long userId,Long tourId);
 
 }
